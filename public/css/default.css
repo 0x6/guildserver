@@ -1,0 +1,10 @@
+body{
+  background-color: grey;
+}
+
+.content-box{
+  background-color: white;
+  width: 70%;
+  height: 1000px;
+  margin: -20 auto 100 auto;
+}
