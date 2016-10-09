@@ -8,3 +8,23 @@ body{
   height: 1000px;
   margin: -20 auto 100 auto;
 }
+
+#login{
+  color: white;
+  font-weight: bold;
+  font-size: 26px;
+  background-color: slategrey;
+  padding: 4px 0px 4px 0px;
+  border-radius: 2px; 
+  text-align: center;
+  width: 200px;
+  margin: auto;
+  -webkit-box-shadow: 2px 2px 2px 0px darkgrey;
+  -moz-box-shadow: 2px 2px 2px 0px darkgrey;
+  box-shadow: 2px 2px 2px 0px darkgrey;
+  cursor: pointer;
+}
+
+#login:hover {
+  background-color: lightgrey;
+}
