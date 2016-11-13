@@ -28,3 +28,21 @@ body{
 #login:hover {
   background-color: lightgrey;
 }
+
+.calendar{
+  padding-top: 40px;
+  width: 100%;
+}
+
+.calendar table{
+  margin: auto;
+  border: 1px solid black;
+}
+
+.calendar td{
+  border: 1px solid black;
+}
+
+.calendar th{
+  width: 100px;
+}
