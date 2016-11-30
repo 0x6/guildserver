@@ -2,8 +2,9 @@ var express = require("express");
 var querystring = require("querystring");
 var https = require('https');
 var request = require('request');
-var MongoClient = require('mongodb').MongoClient
-  , assert = require('assert');
+var MongoClient = require('mongodb').MongoClient,
+  f = require('util').format,
+  assert = require('assert');
 var app = express();
 
 // OAUTH
@@ -14,15 +15,16 @@ var state = "";
 var discoveryDoc;
 
 // MONGODB
-var user = encodeURIComponent('root');
-var password = encodeURIComponent('chs00pag');
-var authMechanism = 'DEFAULT';
-var authSource = 'myproject';
+var user = encodeURIComponent("igno4");
+var password = encodeURIComponent("chs00pag");
+var database = "guildinfo"
+var authMechanism = "DEFAULT";
+var authSource = "guildinfo";
 
 // Connection URL
-var dburl = f('mongodb://%s:%s@localhost:27017?authMechanism=%s&authSource=',
-  user, password, authMechanism, authSource);
-
+var dburl = f('mongodb://%s:%s@localhost:27017/%s?authMechanism=%s&authSource=%s',
+  user, password, database, authMechanism, authSource);
+//"mongodb://localhost:27017/guildinfo";
 
 app.use(express.static("public"));
 
@@ -69,7 +71,7 @@ app.get('/login', function(req, res){
 });
 
 app.get('/callback', function(req, res){
-  res.redirect('/');
+  //res.redirect('/');
   
   if(req.query.state == state){
     //HTTP POST with above params to discoveryDoc.token_endpoint
@@ -81,7 +83,7 @@ app.get('/callback', function(req, res){
       redirect_uri: 'http://localhost:8888/callback',
       grant_type: 'authorization_code'
     }},
-    function(error, res, body){
+    function(error, response, body){
       if(error)
         throw error;
       
@@ -91,9 +93,13 @@ app.get('/callback', function(req, res){
       var segments = idToken.split('.');
       var payload = JSON.parse(base64urlDecode(segments[1]));
       
-      console.log(payload);
+      res.redirect('/#/control-panel?data=' + segments[1]);
     });
   }
+});
+
+app.get('/logout', function(req, res){
+  
 });
     
 function base64urlDecode(str) {
@@ -108,4 +114,21 @@ function base64urlUnescape(str) {
 app.listen(8888, function(){
   console.log("Server listening on port 8888...");
   getEndpoints();
+  
+  /*MongoClient.connect(dburl, function (err, db){
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log("Connected to server.");
+    var col = db.collection('users');
+    
+    col.deleteOne({a:1});
+    
+    col.find().toArray(function(err, list){
+      console.log(list);
+    });
+    
+    db.close();
+  });*/
 });

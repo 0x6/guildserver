@@ -1,79 +1,33 @@
 <html>
 <head>
-  <script src="js/jquery-1.11.3.min.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="js/lib/jquery-1.11.3.min.js"></script>
+  <script src="js/lib/js.cookie.js"></script>
+  <script src="js/lib/bootstrap.js"></script>
+  <script src="js/lib/angular.js"></script>
+  <script src="js/lib/angular-route.js"></script>
   <script src="js/exiled.js"></script>
   <script src="js/calendar.js"></script>
   <link rel="stylesheet" href="css/bootstrap.css"/>
   <link rel="stylesheet" href="css/default.css"/>
 </head>
-<body>
+<body ng-app="main">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" style="color: white;">Morior Invictus</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#" data-page="home">Home</a></li>
-      <li><a href="#" data-page="dps">DPS</a></li>
-      <li><a href="#" data-page="schedule">Schedule</a></li> 
-      <li><a href="#">Page 3</a></li>
+      <li><a href="#/">Home</a></li>
+      <li><a href="#dps">DPS</a></li>
+      <li><a href="#schedule">Schedule</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li id="control-panel" style="display: none;"><a href="#control-panel">Control Panel</a></li>
+      <li id="sign-in"><a href="/login">Sign In</a></li>
+      <li id="log-out" style="display: none;"><a href="/logout">Log Out</a></li>
     </ul>
   </div>
 </nav>
-<div id="home" class="container content-box">
-  <div style="width: 800px; margin: 50 auto 50 auto; text-align: center; background-color: #DDDDDD; height: 200px;">Random news feed stuff</div>
-  <div id="login" onclick="window.location='/login'">Login</div>
-</div>
-<div id="dps" class="container content-box" style="display: none;">
-  <div class="row">
-    <table class="table" style="width: 800px; margin: 50 auto 0 auto;">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>DPS</th>
-          <th>Projected DPS</th>
-          <th>Percentile</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Kiyosa</td>
-          <td>500,000</td>
-          <td>250,000</td>
-          <td>1000</td>
-        </tr>
-        <tr>
-          <td>Tightaxehole</td>
-          <td>1</td>
-          <td>100,000</td>
-          <td>-1000</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<div id="schedule" class="container content-box" style="display: none">
-  <div class="calendar">
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-          <th>Sunday</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    
-    <div id="submit" style="width: 100px; height: 20px; border: 1px solid black;"></div>
-  </div>
-</div>
+<div ng-view class="container content-box"></div>
 </body>    
 </html>
